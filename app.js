@@ -6,25 +6,53 @@ const possibleChoices = document.querySelectorAll("button");
 
 let userChoice;
 let computerChoice;
+let result;
 
 possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
     userChoice = e.target.id;
     userChoiceDisplay.innerHTML = userChoice;
     generateComChoice();
+    getResult();
 }))
 
 function generateComChoice(){
     const randomNumber = Math.floor(Math.random() * 3) + 1;
     
     if (randomNumber === 1) {
-        computerChoice = 'Rock';
+        computerChoice = 'rock';
     }
     if (randomNumber === 2) {
-        computerChoice = 'Paper';
+        computerChoice = 'paper';
     }
     if (randomNumber === 3) {
-        computerChoice = 'Scissors';
+        computerChoice = 'scissors';
     }
     computerChoiceDisplay.innerHTML = computerChoice;
 }
 
+function getResult(){
+    if(computerChoice === userChoice){
+        result = 'Its a Draw!';
+    }
+    if(computerChoice === 'rock' && userChoice === 'paper'){
+        result = 'You win!';
+    }
+    if(computerChoice === 'rock' && userChoice === 'scissors'){
+        result = 'You Lost!';
+    }
+    if(computerChoice === 'paper' && userChoice === 'scissors'){
+        result = 'You win!';
+    }
+    if(computerChoice === 'paper' && userChoice === 'rock'){
+        result = 'You Lose!';
+    }
+    if(computerChoice === 'scissors' && userChoice === 'rock'){
+        result = 'You Win!';
+    }
+    if(computerChoice === 'scissors' && userChoice === 'paper'){
+        result = 'You Lose!';
+    }
+
+    resultDisplay.innerHTML = result;
+
+}
